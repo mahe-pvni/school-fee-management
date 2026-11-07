@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Fee Management System | Developed by ChatGPT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">S</div><div><b>SchoolPay</b><small>Fee Management</small></div></div>
+    <nav>
+      <button class="nav-link active" data-view="dashboard">▦ Dashboard</button>
+      <button class="nav-link" data-view="students">♙ Students</button>
+      <button class="nav-link" data-view="fees">▤ Fee Details</button>
+      <button class="nav-link" data-view="payments">₹ Payments</button>
+      <button class="nav-link" data-view="reports">▥ Reports</button>
+    </nav>
+    <div class="sidebar-foot">School Fee Payment<br>Management System<br><small>Developed by ChatGPT</small></div>
+  </aside>
+  <main class="main">
+    <header><div><p class="eyebrow">SCHOOL ADMINISTRATION</p><h1 id="page-title">Dashboard</h1></div><div class="admin-chip">● Admin Panel</div></header>
+    <section id="dashboard" class="view">
+      <div class="welcome"><div><p>MANAGEMENT OVERVIEW</p><h2>Welcome to SchoolPay</h2><span>Manage student fees, payments and pending balances in one place.</span></div><div class="welcome-mark">₹</div></div>
+      <div class="stats">
+        <article class="stat"><span>Total Students</span><strong id="stat-students">0</strong><small>Registered students</small></article>
+        <article class="stat"><span>Total Fees Assigned</span><strong id="stat-assigned">₹0</strong><small>Fee amount assigned</small></article>
+        <article class="stat"><span>Total Collected</span><strong id="stat-collected">₹0</strong><small>Payments received</small></article>
+        <article class="stat"><span>Pending Amount</span><strong id="stat-pending">₹0</strong><small>Balance to be collected</small></article>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Quick actions</h3><p>Choose a task to get started.</p></div></div><div class="quick-actions">
+        <button class="quick" data-go="students"><b>＋</b><span><strong>Add Student</strong><small>Register a student</small></span></button>
+        <button class="quick" data-go="fees"><b>▤</b><span><strong>Assign Fee</strong><small>Create a fee record</small></span></button>
+        <button class="quick" data-go="payments"><b>₹</b><span><strong>Record Payment</strong><small>Collect a fee payment</small></span></button>
+        <button class="quick" data-go="reports"><b>▥</b><span><strong>View Reports</strong><small>Check fee balances</small></span></button>
+      </div></div>
+    </section>
+
+    <section id="students" class="view hidden">
+      <div class="panel"><div class="panel-head"><div><h3>Add student</h3><p>Enter the student's basic information.</p></div></div>
+        <form id="student-form" class="form-grid">
+          <label>Student name<input name="name" required maxlength="100" placeholder="Enter full name"></label>
+          <label>Class<input name="class" required placeholder="e.g. 10-A"></label>
+          <label>Roll number<input name="roll_no" required placeholder="Enter roll number"></label>
+          <label>Phone<input name="phone" maxlength="15" placeholder="Phone number"></label>
+          <label>Email<input name="email" type="email" placeholder="Email address"></label>
+          <div class="form-action"><button class="primary">Save Student</button></div>
+        </form>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Student records</h3><p>All registered students.</p></div><input class="search" id="student-search" placeholder="Search students..."></div>
+        <div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Class</th><th>Roll No.</th><th>Phone</th><th>Email</th><th>Action</th></tr></thead><tbody id="students-body"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="fees" class="view hidden">
+      <div class="panel"><div class="panel-head"><div><h3>Assign student fee</h3><p>Set the fee amount and due date.</p></div></div>
+        <form id="fee-form" class="form-grid">
+          <label>Student<select name="student_id" id="fee-student" required><option value="">Select student</option></select></label>
+          <label>Academic year<input name="academic_year" required placeholder="2026-2027"></label>
+          <label>Fee type<input name="fee_type" required placeholder="Tuition Fee"></label>
+          <label>Total amount (₹)<input name="total_amount" type="number" min="0.01" step="0.01" required></label>
+          <label>Due date<input name="due_date" type="date"></label>
+          <div class="form-action"><button class="primary">Assign Fee</button></div>
+        </form>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Fee details</h3><p>Assigned fees and current balances.</p></div></div><div class="table-wrap"><table><thead><tr><th>Student</th><th>Class / Roll</th><th>Academic Year</th><th>Fee Type</th><th>Total</th><th>Paid</th><th>Pending</th><th>Due Date</th></tr></thead><tbody id="fees-body"></tbody></table></div></div>
+    </section>
+
+    <section id="payments" class="view hidden">
+      <div class="panel"><div class="panel-head"><div><h3>Record payment</h3><p>Record full or partial fee payments.</p></div></div>
+        <form id="payment-form" class="form-grid">
+          <label>Fee record<select name="fee_id" id="payment-fee" required><option value="">Select fee record</option></select></label>
+          <label>Amount paid (₹)<input name="amount_paid" type="number" min="0.01" step="0.01" required></label>
+          <label>Payment date<input name="payment_date" type="date" id="payment-date" required></label>
+          <label>Payment method<select name="payment_method" required><option value="">Select method</option><option>Cash</option><option>UPI</option><option>Card</option><option>Bank Transfer</option><option>Cheque</option></select></label>
+          <div class="form-action"><button class="primary">Save Payment</button></div>
+        </form>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Payment history</h3><p>Recorded payment transactions and receipt numbers.</p></div></div><div class="table-wrap"><table><thead><tr><th>Receipt No.</th><th>Student</th><th>Fee Type</th><th>Amount</th><th>Date</th><th>Method</th><th>Status</th></tr></thead><tbody id="payments-body"></tbody></table></div></div>
+    </section>
+
+    <section id="reports" class="view hidden">
+      <div class="panel"><div class="panel-head"><div><h3>Student fee report</h3><p>Total assigned, collected and pending amount by student.</p></div><button class="secondary" id="print-report">Print Report</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Roll No.</th><th>Total Fee</th><th>Paid</th><th>Pending</th></tr></thead><tbody id="reports-body"></tbody></table></div>
+      </div>
+    </section>
+    <footer>© 2026 School Fee Payment Management System · Developed by ChatGPT</footer>
+  </main>
+  <div id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body></html>

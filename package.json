@@ -1,0 +1,18 @@
+{
+  "name": "school-fee-management-system-chatgpt",
+  "version": "1.0.0",
+  "description": "School Fee Payment Management System - Developed by ChatGPT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
